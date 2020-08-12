@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Haproxy as balanser for eSchool Back-End
+# Haproxy as balanser for D-tester
 
 #yum update -y
 yum install -y mc
@@ -21,3 +21,4 @@ cat /etc/haproxy/server.crt >> /etc/haproxy/server.pem
 yes|cp -f /vagrant/haproxy.cfg /etc/haproxy/ 
 
 systemctl restart haproxy.service
+

@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-num_of_be = 1
+num_of_be = 2
+num_of_fe = 2
 
 Vagrant.configure("2") do |config| 
 
@@ -14,7 +15,7 @@ Vagrant.configure("2") do |config|
       my.vm.hostname = 'my8'
       my.vm.network "private_network", ip: "192.168.56.31"
       my.vm.provider "virtualbox" do |vb|
-         vb.memory = "1024"
+         vb.memory = "768"
       end
       my.vm.provision "shell", inline: "chmod 0777 /vagrant/*.sh"
       my.vm.provision "shell", path: "root_ssh.sh"	
@@ -35,6 +36,19 @@ Vagrant.configure("2") do |config|
       end
    end
 
+   (1..num_of_fe).each do |i|
+      config.vm.define "fe#{i}" do |fe|
+         fe.vm.box = "centos/7"
+         fe.vm.hostname = "fe#{i}"
+         fe.vm.network "private_network", ip: "192.168.56.12#{i}"
+         fe.vm.provider "virtualbox" do |vb|
+            vb.memory = "1024"
+         end
+         fe.vm.provision "shell", path: "root_ssh.sh"	
+         fe.vm.provision "shell", path: "fe.sh"	
+      end
+   end
+
    config.vm.define "hp" do |hp|
       hp.vm.box = "centos/7"
       hp.vm.hostname = 'hp'
@@ -42,9 +56,8 @@ Vagrant.configure("2") do |config|
       hp.vm.provider "virtualbox" do |vb|
          vb.memory = "1024"
       end
-      hp.vm.provision "shell", inline: "chmod 0777 /vagrant/*.sh"
       hp.vm.provision "shell", path: "root_ssh.sh"	
-      hp.vm.provision "shell", path: "hp_be.sh"	
+      hp.vm.provision "shell", path: "hp.sh"	
    end
 
 end

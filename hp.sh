@@ -4,7 +4,7 @@
 
 #yum update -y
 yum install -y mc
-
+yum install socat -y
 
 yum install -y haproxy
 

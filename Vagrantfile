@@ -6,7 +6,6 @@ num_of_fe = 2
 Vagrant.configure("2") do |config| 
 
    config.vagrant.host = "windows"
-#       не тестити на наявність нового образу
    config.vm.box_check_update = true
    config.ssh.insert_key = false
 
@@ -17,7 +16,6 @@ Vagrant.configure("2") do |config|
       my.vm.provider "virtualbox" do |vb|
          vb.memory = "768"
       end
-      my.vm.provision "shell", inline: "chmod 0777 /vagrant/*.sh"
       my.vm.provision "shell", path: "root_ssh.sh"	
       my.vm.provision "shell", path: "db.sh"	
    end
@@ -30,7 +28,6 @@ Vagrant.configure("2") do |config|
          be.vm.provider "virtualbox" do |vb|
             vb.memory = "1024"
          end
-         be.vm.provision "shell", inline: "chmod 0777 /vagrant/*.sh"
          be.vm.provision "shell", path: "root_ssh.sh"	
          be.vm.provision "shell", path: "be.sh"	
       end

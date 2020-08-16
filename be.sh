@@ -42,6 +42,8 @@ cp ./dtapi/.htaccess /var/www/dtapi/api/.htaccess
 sed -i -e "s|'base_url'   => '/',|'base_url'   => '/api/',|g"  /var/www/dtapi/api/application/bootstrap.php
 sed -i -e "s|RewriteBase /|RewriteBase /api/|g"  /var/www/dtapi/api/.htaccess
 
+sed -i -e "s|$tableName = \"groups\";|$tableName = \"dt_groups\";|g"  /var/www/dtapi/api/application/classes/Model/Group.php
+
 sed -i -e "s|PDO_MySQL|PDO|g"  /var/www/dtapi/api/application/config/database.php
 sed -i -e "s|localhost;dbname=dtapi2|192.168.56.31;dbname=dtapi|g"  /var/www/dtapi/api/application/config/database.php
 sed -i -e "s|'password'   => 'dtapi'|'password'   => 'Passw0rd('|g"  /var/www/dtapi/api/application/config/database.php

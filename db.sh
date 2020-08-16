@@ -24,4 +24,8 @@ echo "CREATE TABLE sessions (
     PRIMARY KEY (session_id)) 
     ENGINE=MyISAM DEFAULT CHARSET=utf8; " | mysql -Ddtapi
 
+echo "RENAME TABLE dtapi.groups TO dt_groups; " | mysql -Ddtapi
+
+
+
 #echo "bind-address = 0.0.0.0" >>/etc/my.cnf
